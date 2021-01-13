@@ -1,5 +1,6 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
+  mode: 'spa',
   head: {
     title: 'proj_adiary',
     meta: [
@@ -111,6 +112,10 @@ export default {
       {
         src:'js/dataTables.bootstrap4.min.js', body: true
       },
+      {
+        src:'js/main.js', defer: true, body: true
+      },
+
     ]
   },
 
@@ -128,17 +133,31 @@ export default {
   components: true,
 
   router: {
-    middleware: ['loadExternalJS']
+    middleware: ['loadExternalJS', 'check-auth', 'auth', 'get-user']
   },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
   ],
-
+  axios: {
+  },
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    '@nuxtjs/toast',
   ],
-
+  toast: {
+    position: 'top-right',
+    duration : 3000,
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
   }

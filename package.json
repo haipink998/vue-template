@@ -9,9 +9,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.12.5",
+    "@nuxtjs/toast": "^3.3.1",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
+    "vue-toasted": "^1.1.28",
     "vuex": "^3.6.0"
   },
   "devDependencies": {

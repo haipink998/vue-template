@@ -546,7 +546,9 @@
 </template>
 
 <script>
+import axios from "axios";
 import { excuteAllExternalScript } from "../helpers/index";
+import { mapGetters } from 'vuex';
 export default {
   head() {
     return {
@@ -559,6 +561,7 @@ export default {
       ]
     };
   },
+  
 };
 </script>
 

@@ -20,7 +20,8 @@ export default {
     MenuAction,
     MainMenu,
     MobileMenu
-  }
+  },
+
 }
 </script>
 

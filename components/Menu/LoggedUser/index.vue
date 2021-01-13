@@ -1,15 +1,15 @@
 <template>
-  <div class="logged-user-w avatar-inline">
+  <div class="logged-user-w avatar-inline" >
     <div class="logged-user-i">
       <div class="avatar-w">
-        <img alt="" src="img/avatar1.jpg">
+        <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
       </div>
       <div class="logged-user-info-w">
         <div class="logged-user-name">
-          Maria Gomez
+          {{ userInfo && userInfo.last_name}} {{ userInfo && userInfo.first_name}} 
         </div>
         <div class="logged-user-role">
-          Administrator
+          Member
         </div>
       </div>
       <div class="logged-user-toggler-arrow">
@@ -18,15 +18,15 @@
       <div class="logged-user-menu color-style-bright">
         <div class="logged-user-avatar-info">
           <div class="avatar-w">
-            <img alt="" src="img/avatar1.jpg">
+            <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
           </div>
           <nuxt-link to="/profile">
             <div class="logged-user-info-w">
               <div class="logged-user-name">
-              Maria Gomez 
+              {{ userInfo && userInfo.last_name}} {{ userInfo && userInfo.first_name}} 
               </div>
               <div class="logged-user-role">
-                Administrator
+                Members
               </div>
             </div>
           </nuxt-link>
@@ -36,29 +36,36 @@
         </div>
         <ul>
           <li>
-            <a href="#"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a>
-          </li>
-          <li>
             <nuxt-link to="/profile"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></nuxt-link>
           </li>
           <li>
-            <a href="#"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-          </li>
-          <li>
-            <a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
+            <a @click="logout"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
           </li>
         </ul>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
-export default {
+import { mapMutations } from 'vuex';
+import { mapGetters} from 'vuex';
+import mutationTypes from '~/constants/mutationTypes';
 
+export default {
+  computed: {
+    userInfo: function() {
+      return this.$store.getters['user/getUserInfo'];
+    }
+  },
+
+  methods: {
+    async logout() {
+      const res = await this.$store.dispatch(`auth/${mutationTypes.AUTH.LOGOUT}`);
+        this.$router.push('/login');
+    },
+  },
 }
 </script>
 
