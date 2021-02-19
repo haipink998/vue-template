@@ -2,39 +2,14 @@
   <div class="col-sm-4">
     <div class="element-wrapper">
       <h6 class="element-header">
-        Small Infos
+        Thống kê
       </h6>
       <div class="element-box el-tablo">
         <div class="label">
-          Products Sold
+          TỔNG
         </div>
         <div class="value">
-          574
-        </div>
-        <div class="trending trending-up">
-          <span>12%</span><i class="os-icon os-icon-arrow-up2"></i>
-        </div>
-      </div>
-      <div class="element-box el-tablo">
-        <div class="label">
-          New Customers
-        </div>
-        <div class="value">
-          12
-        </div>
-        <div class="trending trending-down-basic">
-          <span>9%</span><i class="os-icon os-icon-graph-down"></i>
-        </div>
-      </div>
-      <div class="element-box el-tablo">
-        <div class="label">
-          Gross Profit
-        </div>
-        <div class="value">
-          $2,507
-        </div>
-        <div class="trending trending-down-basic">
-          <span>12%</span><i class="os-icon os-icon-arrow-2-down"></i>
+          {{reduceData}} ml
         </div>
       </div>
     </div>
@@ -43,7 +18,20 @@
 
 <script>
 export default {
-
+  props: {
+    dataTotal: {
+      type: String,
+      default: '',
+    }
+  },
+  computed: {
+    reduceData: function() {
+      return this.dataTotal.reduce((total, ele) => {
+        total = total + ele.total;
+        return total;
+      }, 0);
+    }
+  }
 }
 </script>
 

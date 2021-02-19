@@ -1,59 +1,27 @@
 <template>
   <div class="element-wrapper">
     <h6 class="element-header">
-      Line Chart with Tabs
+      Biểu đồ cân nặng
     </h6>
     <div class="element-box">
-      <div class="os-tabs-w">
-        <div class="os-tabs-controls">
-          <ul class="nav nav-tabs smaller">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#tab_overview">Overview</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#tab_sales">Sales</a>
-            </li>
-          </ul>
-          <ul class="nav nav-pills smaller">
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#">Today</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#">7 Days</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#">14 Days</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#">Last Month</a>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane active" id="tab_overview">
-            <div class="el-tablo">
-              <div class="label">
-                Unique Visitors
-              </div>
-              <div class="value">
-                12,537
-              </div>
-            </div>
-            <div class="el-chart-w">
-              <canvas height="150px" id="lineChart" width="600px"></canvas>
-            </div>
-          </div>
-          <div class="tab-pane" id="tab_sales"></div>
-          <div class="tab-pane" id="tab_conversion"></div>
-        </div>
-      </div>
+      <Linechart 
+        :label="'asdasd'"
+        :data="[13,34,44,35,16,23,74,18,48,39]"
+        :dataLabels="['a','b','da','adsad','dasdasd','a','b','da','adsad','dasdasd']"
+        :bordercolor="'rgba(1, 116, 188, 0.50)'"
+        :pointcolor="'#4b4e81'"
+        :bgcolor="'transparent'"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import Linechart from "~/components/Chart/Linechart"
 export default {
-
+components: {
+  Linechart
+}
 }
 </script>
 

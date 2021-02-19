@@ -1,5 +1,4 @@
 import mutationTypes from "~/constants/mutationTypes";
-import httpMethod from "~/services/httpMethod"
 
 export default ({ store }) => {
   if (store.getters['auth/isAuthenticated']) {

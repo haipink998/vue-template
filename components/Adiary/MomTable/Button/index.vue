@@ -4,120 +4,65 @@
       <div class="col-sm-6">
         <button
           class="btn btn-sm btn-success my-2"
-          data-target=".bd-example-modal-sm"
-          data-toggle="modal"
           type="button"
+          @click="addAction"
         >
-          Add
+          Bắt đầu hút sữa
         </button>
-        <button class="btn btn-sm btn-danger">Delete</button>
-      </div>
-      <div class="col-sm-6">
-        <form class="form-inline justify-content-sm-end">
-          <input
-            class="form-control form-control-sm rounded bright"
-            placeholder="Search"
-            type="text"
-          /><select class="form-control form-control-sm rounded bright">
-            <option selected="selected" value="">
-              Select Status
-            </option>
-            <option value="Pending">
-              Pending
-            </option>
-            <option value="Active">
-              Active
-            </option>
-            <option value="Cancelled">
-              Cancelled
-            </option>
-          </select>
-        </form>
       </div>
     </div>
-       <!-- FORM MODAL -->
-      <div
-        aria-hidden="true"
-        aria-labelledby="mySmallModalLabel"
-        class="modal fade bd-example-modal-sm"
-        role="dialog"
-        tabindex="-1"
-      >
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Add Action
-              </h5>
-              <button
-                aria-label="Close"
-                class="close"
-                data-dismiss="modal"
-                type="button"
-              >
-                <span aria-hidden="true"> &times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label for=""> Action</label>
-                  <select class="form-control  bright">
-                    <option selected="selected" value="">
-                      Select Status
-                    </option>
-                    <option value="hut-sua">
-                      Hút sữa
-                    </option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for=""> Time Start</label>
-                  <input class="form-control" type="time" value="13:45:00" />
-                </div>
-                <div class="form-group">
-                  <label for=""> Lượng sữa (Ml)</label>
-                  <input
-                    class="form-control col col-sm-4"
-                    placeholder="0 Ml"
-                    value="0"
-                    type="number"
-                  />
-                </div>
-                <div class="form-group">
-                  <label for=""> Chú ý:</label>
-                  <textarea
-                    class="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="3"
-                  ></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                type="button"
-              >
-                Close
-              </button>
-              <button class="btn btn-success" type="button">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / -->
   </div>
-  
 </template>
 
 <script>
+import moment from "moment";
+import Input from "~/components/FormField/Input";
+import { optionsAction } from '~/constants';
+import mutationTypes from '~/constants/mutationTypes';
 export default {
+  components: {
+    Input
+  },
+  data() {
+    return {
+      actionMom: "1",
+      start_time: moment().format('YYYY-MM-DDTHH:mm:ss'),
+    }
+  },
+  computed: {
+    optionsActionLocal: function() {
+      return optionsAction;
+    },
+    userId: function() {
+      return this.$store.getters["auth/getIdOfUser"]
+    },
+  },
+  methods: {
+  moment: function () {
+    return moment();
+  },
+ 
+  async addAction() {
+    try {
+      const res = await this.$store.dispatch(`diary/${mutationTypes.TABLE.ADD_ACTION}`, {
+        action: this.actionMom,
+        start_time: this.start_time,
+        actual_date: this.start_time,
+        user: this.userId,
+      }); 
+      if(res) {
+        this.$toast.success("Tạo hút sữa thành công");
+        this.$store.dispatch(`diary/${mutationTypes.USER.GET_DIARY}`);
+      }else {
+        this.$toast.error("Xảy ra lỗi")
+      }
+    } catch (error) {
+      console.log(error, "wrong")
+    }
+  }
+  },
 
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

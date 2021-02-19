@@ -2,39 +2,46 @@
   <div class="controls-above-table">
     <div class="row">
       <div class="col-sm-6">
-        <button
-          class="btn btn-sm btn-success my-2"
-          data-target=".modal2"
-          data-toggle="modal"
-          type="button"
-        >
-          Add
-        </button>
-        <button class="btn btn-sm btn-danger">Delete</button>
+        <div v-if="timeCheck >= 5 && timeCheck <= 9">
+          <button class="btn btn-sm btn-success my-2" type="button">
+            Bắt đầu ngày mới
+          </button>
+        </div>
+        <div v-else>
+          <button
+            class="btn btn-sm btn-success my-2"
+            data-target=".modal2"
+            data-toggle="modal"
+          >
+            Bắt đầu
+          </button>
+        </div>
       </div>
       <div class="col-sm-6">
-        <form class="form-inline justify-content-sm-end">
-          <input
-            class="form-control form-control-sm rounded bright"
-            placeholder="Search"
-            type="text"
-          /><select class="form-control form-control-sm rounded bright">
-            <option selected="selected" value="">
-              Select Status
-            </option>
-            <option value="Pending">
-              Pending
-            </option>
-            <option value="Active">
-              Active
-            </option>
-            <option value="Cancelled">
-              Cancelled
-            </option>
-          </select>
-        </form>
+        <div>
+          <form class="form-inline justify-content-sm-end">
+            <Select 
+              :label="'abc'"
+            />
+            <select class="form-control form-control-sm rounded bright">
+              <option selected="selected">
+                Select Status
+              </option>
+              <option value="Pending">
+                Pending
+              </option>
+              <option value="Active">
+                Active
+              </option>
+              <option value="Cancelled">
+                Cancelled
+              </option>
+            </select>
+          </form>
+        </div>
       </div>
     </div>
+
     <!-- FORM MODAL -->
     <div
       id="myModal"
@@ -49,6 +56,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">
               Add Action
+              {{ templateList }}
             </h5>
             <button
               aria-label="Close"
@@ -70,7 +78,7 @@
                   <option value="an">
                     Ăn
                   </option>
-                    <option value="ngu">
+                  <option value="ngu">
                     Ngủ
                   </option>
                 </select>
@@ -116,7 +124,26 @@
 </template>
 
 <script>
-export default {};
+import mutationTypes from "~/constants/mutationTypes";
+import { currentTime } from "~/helpers/time";
+import Select from "~/components/FormField/Select"
+export default {
+  components: {
+    Select
+  },
+  computed: {
+    timeCheck: function(time) {
+      const timezone = currentTime(time);
+      return timezone;
+    },
+    templateList: function() {
+      const list = this.$store.dispatch(
+        `template/${mutationTypes.TEMPLATE.GET_TEMPLATE}`
+      );
+      return list;
+    }
+  }
+};
 </script>
 
 <style></style>

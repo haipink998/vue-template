@@ -12,14 +12,20 @@
       -------------------->
       <div class="logged-user-w">
         <div class="logged-user-i">
-          <div class="avatar-w">
-            <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
+          <div class="avatar-w" v-if="userAvatar">
+            <img alt="" :src="userAvatar">
+          </div>
+          <div class="avatar-w" v-else>
+            <img alt="" src="img/avatar1.png">
           </div>
           <div class="logged-user-menu color-style-bright">
             <nuxt-link class="logged-user-avatar-info" to="/profile">
-              <div class="avatar-w">
-                <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
-              </div>
+             <div class="avatar-w" v-if="userAvatar">
+            <img alt="" :src="userAvatar">
+            </div>
+            <div class="avatar-w" v-else>
+              <img alt="" src="img/avatar1.png">
+            </div>
               <div class="logged-user-info-w">
                 <div class="logged-user-name">
                   {{ userInfo && userInfo.last_name}} {{ userInfo && userInfo.first_name}} 
@@ -55,11 +61,19 @@
 
 <script>
 import { mapGetters} from 'vuex';
+import mutationTypes from '~/constants/mutationTypes';
 
 export default {
    computed: {
     userInfo: function() {
       return this.$store.getters['user/getUserInfo'];
+    },
+     userAvatar: function() {
+      return this.$store.getters['user/getUserInfo']?.user_profile?.profile_picture || null;
+    },
+    children: function(){
+      const userInfo = this.$store.getters['user/getUserInfo'];
+      return userInfo?.user_children?.[0] || {};
     }
   },
     methods: {

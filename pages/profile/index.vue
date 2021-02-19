@@ -1,5 +1,9 @@
 <template>
-  <Profile />  
+  <Profile
+    :name="123"
+    :dob="25/22"
+    gender="Test male"
+  />
 </template>
 
 <script>
@@ -12,16 +16,18 @@ export default {
   head() {
     return {
       bodyAttrs: {
-        class: "menu-position-side menu-side-left full-screen with-content-panel"
+        class:
+          "menu-position-side menu-side-left full-screen with-content-panel"
       },
-        script: [
-        excuteAllExternalScript()
-      ]
+      script: [excuteAllExternalScript()]
     };
+  },
+  mounted: function() {
+  },
+  computed: {
+    
   }
-} 
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

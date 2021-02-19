@@ -4,11 +4,10 @@
         -------------------->
         <div class="menu-mobile menu-activated-on-click color-scheme-dark">
           <div class="mm-logo-buttons-w">
-            <a class="mm-logo" href="index.html"><img src="img/logo.png"><span>Clean Admin</span></a>
+            <nuxt-link class="mm-logo" to="/">
+              <img src="img/logo.png"><span>Clean Admin</span>
+            </nuxt-link>
             <div class="mm-buttons">
-              <div class="content-panel-open">
-                <div class="os-icon os-icon-grid-circles"></div>
-              </div>
               <div class="mobile-menu-trigger">
                 <div class="os-icon os-icon-hamburger-menu-1"></div>
               </div>
@@ -17,14 +16,14 @@
           <div class="menu-and-user">
             <div class="logged-user-w">
               <div class="avatar-w">
-                <img alt="" src="img/avatar1.jpg">
+                <img :src="userInfo && userInfo.user_profile.profile_picture">
               </div>
               <div class="logged-user-info-w">
                 <div class="logged-user-name">
-                  Maria Gomez
+                  {{ userInfo && userInfo.last_name}} {{ userInfo && userInfo.first_name}} 
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                  Member
                 </div>
               </div>
             </div>
@@ -80,20 +79,7 @@
                 </ul>
               </li>
             </ul>
-            <!--------------------
-            END - Mobile Menu List
-            -------------------->
-            <div class="mobile-menu-magic">
-              <h4>
-                Light Admin
-              </h4>
-              <p>
-                Clean Bootstrap 4 Template
-              </p>
-              <div class="btn-w">
-                <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>
-              </div>
-            </div>
+            
           </div>
         </div>
         <!--------------------
@@ -102,7 +88,14 @@
 </template>
 
 <script>
+import { mapGetters} from 'vuex';
+
 export default {
+    computed: {
+        userInfo: function() {
+          return this.$store.getters['user/getUserInfo'];
+        }
+      },
 
 }
 </script>

@@ -1,105 +1,73 @@
 <template>
   <div class="user-profile compact">
-        <div class="up-head-w" style="background-image:url(img/profile_bg1.jpg)">
-          <div class="up-social">
-            <a href="#"><i class="os-icon os-icon-twitter"></i></a><a href="#"><i class="os-icon os-icon-facebook"></i></a>
-          </div>
-          <div class="up-main-info">
+        <!-- v-if Avatar -->
+        <div class="up-head-w" v-if="userAvatar" :style="{ backgroundImage: `url(${userAvatar})`}">
+          <div class="up-main-info" >
             <h2 class="up-header">
+              {{ userInfo.last_name}} {{ userInfo.first_name}} 
             </h2>
             <h6 class="up-sub-header">
-              Email is  {{ loggedInUser.email }}
+              Thành viên
             </h6>
           </div>
           <svg class="decor" width="842px" height="219px" viewBox="0 0 842 219" preserveAspectRatio="xMaxYMax meet" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(-381.000000, -362.000000)" fill="#FFFFFF"><path class="decor-path" d="M1223,362 L1223,581 L381,581 C868.912802,575.666667 1149.57947,502.666667 1223,362 Z"></path></g></svg>
         </div>
+        <!--  -->
+        <div class="up-head-w" v-else style="background-image: url(img/avatar1.png)">
+          <div class="up-main-info" >
+            <h2 class="up-header">
+              {{ userInfo.last_name}} {{ userInfo.first_name}} 
+            </h2>
+            <h6 class="up-sub-header">
+              Thành viên
+            </h6>
+          </div>
+          <svg class="decor" width="842px" height="219px" viewBox="0 0 842 219" preserveAspectRatio="xMaxYMax meet" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g transform="translate(-381.000000, -362.000000)" fill="#FFFFFF"><path class="decor-path" d="M1223,362 L1223,581 L381,581 C868.912802,575.666667 1149.57947,502.666667 1223,362 Z"></path></g></svg>
+        </div>
+        <!-- End V-If -->
         <div class="up-controls">
           <div class="row">
             <div class="col-sm-6">
               <div class="value-pair">
                 <div class="label">
-                  Status:
+                  Trạng thái:
                 </div>
                 <div class="value badge badge-pill badge-success">
-                  Online
+                  Hoạt động
                 </div>
               </div>
-            </div>
-            <div class="col-sm-6 text-right">
-              <a class="btn btn-primary btn-sm" href=""><i class="os-icon os-icon-link-3"></i><span>Add to Friends</span></a>
             </div>
           </div>
         </div>
         <div class="up-contents">
           <div class="m-b">
-            <div class="row m-b">
-              <div class="col-sm-6 b-r b-b">
-                <div class="el-tablo centered padded-v">
-                  <div class="value">
-                    25
-                  </div>
-                  <div class="label">
-                    Products Sold
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 b-b">
-                <div class="el-tablo centered padded-v">
-                  <div class="value">
-                    315
-                  </div>
-                  <div class="label">
-                    Friends
-                  </div>
-                </div>
-              </div>
-            </div>
+            
             <div class="padded">
               <div class="os-progress-bar primary">
-                <div class="bar-labels">
-                  <div class="bar-label-left">
-                    <span>Profile Completion</span><span class="positive">+10</span>
-                  </div>
-                  <div class="bar-label-right">
-                    <span class="info">72/100</span>
-                  </div>
+                <div class="bar-labels" style="font-weight:bold">
+                    <span>Tên mẹ:</span>
                 </div>
-                <div class="bar-level-1" style="width: 100%">
-                  <div class="bar-level-2" style="width: 80%">
-                    <div class="bar-level-3" style="width: 30%"></div>
-                  </div>
+                <div class="bar-label" style="border-bottom: 1px solid #ccc;">
+                    <span>{{ userInfo.last_name}} {{ userInfo.first_name}}</span>
                 </div>
               </div>
-              <div class="os-progress-bar primary">
-                <div class="bar-labels">
-                  <div class="bar-label-left">
-                    <span>Status Unlocked</span><span class="positive">+5</span>
-                  </div>
-                  <div class="bar-label-right">
-                    <span class="info">45/100</span>
-                  </div>
+               <div class="os-progress-bar primary">
+                <div class="bar-labels" style="font-weight:bold">
+                    <span>Email:</span>
                 </div>
-                <div class="bar-level-1" style="width: 100%">
-                  <div class="bar-level-2" style="width: 30%">
-                    <div class="bar-level-3" style="width: 10%"></div>
-                  </div>
+                <div class="bar-label" style="border-bottom: 1px solid #ccc;">
+                    <span>{{ userInfo.email}} </span>
                 </div>
               </div>
-              <div class="os-progress-bar primary">
-                <div class="bar-labels">
-                  <div class="bar-label-left">
-                    <span>Followers</span><span class="negative">-12</span>
-                  </div>
-                  <div class="bar-label-right">
-                    <span class="info">74/100</span>
-                  </div>
+               <div class="os-progress-bar primary">
+                <div class="bar-labels" style="font-weight:bold">
+                    <span>Địa chỉ:</span>
                 </div>
-                <div class="bar-level-1" style="width: 100%">
-                  <div class="bar-level-2" style="width: 80%">
-                    <div class="bar-level-3" style="width: 60%"></div>
-                  </div>
+                <div class="bar-label" style="border-bottom: 1px solid #ccc;">
+                    <span>{{ userInfoUserProfile.address}} </span>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -107,8 +75,22 @@
 </template>
 
 <script>
+import { mapGetters} from 'vuex';
+import { typeGender } from "~/constants/index";
+
 export default {
-middleware: 'auth',
+ computed: {
+    userInfo: function() {
+      return this.$store.getters['user/getUserInfo'] || {};
+    },
+     userAvatar: function() {
+      return this.$store.getters['user/getUserInfo']?.user_profile?.profile_picture || null;
+    },
+    userInfoUserProfile: function() {
+    const userInfo = this.$store.getters['user/getUserInfo'];
+    return userInfo?.user_profile || {};
+    },
+  },
 }
 </script>
 

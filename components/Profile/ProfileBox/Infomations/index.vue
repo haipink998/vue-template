@@ -1,16 +1,17 @@
 <template>
  <div class="col-sm-5">
   <Infomations />
-  <Activity />
+  <InfomationsSon />
  </div>
 </template>
 
 <script>
-import Activity from "./activity";
-import Infomations from "./infomations"
+
+import Infomations from "./infomations";
+import InfomationsSon from "./infomation-son";
 export default {
   components:{
-    Activity,Infomations
+    Infomations,InfomationsSon
   }
 }
 </script>

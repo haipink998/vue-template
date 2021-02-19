@@ -13,9 +13,9 @@ const state = () => ({
  * initial getters
  */
 const getters = {
-  isAuthenticated: (state) =>
-    state.user && state.user.token && state.user.token.length > 0,
-  getIdOfUser: (state) => state.user && state.user.user_id
+  isAuthenticated: (state) => state.user && state.user.token && state.user.token.length > 0,
+  getIdOfUser: (state) => state.user && state.user.user_id,
+
 };
 
 /**
@@ -56,9 +56,9 @@ const actions = {
   },
   async register({commit}, payload) {
     try {
-      const { username,password,email} = payload || {};
-      const res = await authServices.register({ username, password, email});
-      console.log({res}, '123');
+      const { username,first_name,last_name,password,email} = payload || {};
+      const res = await authServices.register(payload || {});
+      return res;
     } catch (error) {
       console.log(error);
     }
@@ -73,8 +73,12 @@ const mutations = {
   [mutationTypes.AUTH.SET_USER](state, payload) {
     state.user = {
       token: payload.token,
-      email: payload.email,
       user_id: payload.user_id
+    };
+  },
+  [mutationTypes.AUTH.SET_SON](state, payload) {
+    state.user = {
+      id: payload.id
     };
   },
   [mutationTypes.AUTH.LOGOUT](state, payload){

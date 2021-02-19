@@ -1,144 +1,85 @@
 <template>
-  <div class="table-responsive">
-    <table class="table table-bordered table-lg table-v2 table-striped">
-      <thead>
-        <tr>
-          <th class="text-center">
-            <input class="form-control" type="checkbox" />
-          </th>
-          <th>
-            Action
-          </th>
-          <th>
-            Time
-          </th>
-          <th>
-            Luong Sua(ML)
-          </th>
-          <th>
-            Status
-          </th>
-          <th>
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="text-center">
-            <input class="form-control" type="checkbox" />
-          </td>
-          <td>
-            ĂN
-          </td>
-          <td>
-            12:20
-          </td>
-          <td class="text-right">30 <span>ML</span></td>
-          <td class="text-center">
-            <div
-              class="status-pill green"
-              data-title="Complete"
-              data-toggle="tooltip"
-            ></div>
-          </td>
-          <td class="row-actions">
-            <a href="#"><i class="os-icon os-icon-ui-49" title="Edit"></i></a>
-            <a href="#"><i class="os-icon os-icon-grid-10" title="Copy"></i></a>
-            <a class="danger" href="#"
-              ><i class="os-icon os-icon-ui-15" title="Delete"></i
-            ></a>
-          </td>
-        </tr>
-        <!--  -->
-        <tr>
-          <td class="text-center">
-            <input class="form-control" type="checkbox" />
-          </td>
-          <td>
-            NGỦ
-          </td>
-          <td>
-            12:30
-          </td>
-          <td class="text-right"></td>
-          <td class="text-center">
-            <div
-              class="status-pill yellow"
-              data-title="Pending"
-              data-toggle="tooltip"
-            ></div>
-          </td>
-          <td class="row-actions">
-            <a href="#"><i class="os-icon os-icon-ui-49" title="Edit"></i></a>
-            <a href="#"><i class="os-icon os-icon-grid-10" title="Copy"></i></a>
-            <a class="danger" href="#"
-              ><i class="os-icon os-icon-ui-15" title="Delete"></i
-            ></a>
-          </td>
-        </tr>
-        <!--  -->
-        <tr>
-          <td class="text-center">
-            <input class="form-control" type="checkbox" />
-          </td>
-          <td>
-            NGỦ
-          </td>
-          <td>
-            13:30
-          </td>
-          <td class="text-right"></td>
-          <td class="text-center">
-            <div
-              class="status-pill red"
-              data-title="Cancelled"
-              data-toggle="tooltip"
-            ></div>
-          </td>
-          <td class="row-actions">
-            <a href="#"><i class="os-icon os-icon-ui-49" title="Edit"></i></a>
-            <a href="#"><i class="os-icon os-icon-grid-10" title="Copy"></i></a>
-            <a class="danger" href="#"
-              ><i class="os-icon os-icon-ui-15" title="Delete"></i
-            ></a>
-          </td>
-        </tr>
-        <!--  -->
-        <tr>
-          <td class="text-center">
-            <input class="form-control" type="checkbox" />
-          </td>
-          <td>
-            ĂN
-          </td>
-          <td>
-            14:00
-          </td>
-          <td class="text-right">30 <span>ML</span></td>
-          <td class="text-center">
-            <div
-              class="status-pill green"
-              data-title="Complete"
-              data-toggle="tooltip"
-            ></div>
-          </td>
-          <td class="row-actions">
-            <a href="#"><i class="os-icon os-icon-ui-49" title="Edit"></i></a>
-            <a href="#"><i class="os-icon os-icon-grid-10" title="Copy"></i></a>
-            <a class="danger" href="#"
-              ><i class="os-icon os-icon-ui-15" title="Delete"></i
-            ></a>
-          </td>
-        </tr>
-        <!--  -->
-      </tbody>
-    </table>
-  </div>
+  <table
+    id="dataTable1"
+    width="100%"
+    class="table table-striped table-lightfont"
+  >
+  {{templateList}}
+    <thead>
+      <tr>
+        <th><input type="checkbox" /></th>
+        <th>Hoạt Động</th>
+        <th>Khung giờ</th>
+        <th>Ngày</th>
+        <th>Ghi chú</th>
+        <th>Trạng thái</th>
+        <th>Tùy chỉnh</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="diary in diaryListSon" :key="diary.id">
+        <th><input type="checkbox" /></th>
+        <th>{{ diary.action_name }}</th>
+        <th>{{ diary.start_time_time }} - {{ diary.end_time_time }}</th>
+        <th>{{ diary.end_time_day }}</th>
+        <th>{{ diary.note }}</th>
+        <th>
+          <div
+            data-title="Complete"
+            data-toggle="tooltip"
+            class="status-pill red"
+            v-if="diary.status"
+          ></div>
+          <div
+            data-title="Pending"
+            data-toggle="tooltip"
+            class="status-pill green"
+            v-else
+          ></div>
+        </th>
+        <th class="row-actions">
+          <a href="#"><i class="os-icon os-icon-ui-49" title="Edit"></i></a>
+        </th>
+      </tr>
+    </tbody>
+    <tfoot>
+      <th><input type="checkbox" /></th>
+      <th>Hoạt Động</th>
+      <th>Khung giờ</th>
+      <th>Ngày</th>
+      <th>Ghi chú</th>
+      <th>Trạng thái</th>
+      <th>Tùy chỉnh</th>
+    </tfoot>
+  </table>
+  
 </template>
 
 <script>
-export default {};
+import mutationTypes from '~/constants/mutationTypes';
+import { convertTime, convertDateTime } from "~/helpers/time";
+
+export default {
+  computed: {
+    diaryListSon: function() {
+      const list = this.$store.getters["diary/diaryListSon"];
+      return list.map(el => {
+        return {
+          ...el,
+          status: !!el.end_time,
+          start_time_time: el.start_time
+            ? convertTime(el.start_time)
+            : "Processing",
+          end_time_time: el.end_time ? convertTime(el.end_time) : "Processing",
+          end_time_day: el.end_time
+            ? convertDateTime(el.end_time)
+            : "Processing"
+        };
+      });
+    },
+    
+  }
+};
 </script>
 
 <style></style>

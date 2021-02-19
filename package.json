@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -11,12 +11,16 @@
   "dependencies": {
     "@nuxtjs/toast": "^3.3.1",
     "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "nuxt": "^2.14.6",
+    "vue-chartjs": "^3.5.1",
     "vue-toasted": "^1.1.28",
     "vuex": "^3.6.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "fibers": "^5.0.0",
     "sass": "^1.32.2",
     "sass-loader": "^10.1.0"

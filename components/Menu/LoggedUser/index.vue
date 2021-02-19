@@ -1,8 +1,11 @@
 <template>
   <div class="logged-user-w avatar-inline" >
     <div class="logged-user-i">
-      <div class="avatar-w">
-        <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
+      <div class="avatar-w" v-if="userAvatar">
+        <img alt="" :src="userAvatar">
+      </div>
+          <div class="avatar-w" v-else>
+        <img alt="" src="img/avatar1.png">
       </div>
       <div class="logged-user-info-w">
         <div class="logged-user-name">
@@ -17,8 +20,11 @@
       </div>
       <div class="logged-user-menu color-style-bright">
         <div class="logged-user-avatar-info">
-          <div class="avatar-w">
-            <img alt="" :src="userInfo && userInfo.user_profile.profile_picture">
+          <div class="avatar-w" v-if="userAvatar">
+            <img alt="" :src="userAvatar">
+          </div>
+           <div class="avatar-w" v-else >
+            <img alt="" src="img/avatar1.png">
           </div>
           <nuxt-link to="/profile">
             <div class="logged-user-info-w">
@@ -57,6 +63,9 @@ export default {
   computed: {
     userInfo: function() {
       return this.$store.getters['user/getUserInfo'];
+    },
+    userAvatar: function() {
+      return this.$store.getters['user/getUserInfo']?.user_profile?.profile_picture || null;
     }
   },
 

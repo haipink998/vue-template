@@ -13,8 +13,7 @@
           <Button />
           <!-- Table -->
           <Table />
-          <!-- Pagination -->
-          <Pagination />
+        
         </div>
       </div>
    
@@ -28,7 +27,7 @@ import Table from "./Table";
 import Pagination from "./Pagination"
 export default {
   components:{
-    Button,Table,Pagination
+    Button,Table
   }
 };
 </script>

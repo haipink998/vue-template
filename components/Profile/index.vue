@@ -1,7 +1,6 @@
 <template>
   <div class="content-i">
   <ProfileBox />
-  <ProfilePannel />
   </div>
 </template>
 
@@ -10,7 +9,7 @@ import ProfileBox from "./ProfileBox";
 import ProfilePannel from "./ProfilePanel";
 export default {
   components: {
-    ProfileBox,ProfilePannel
+    ProfileBox, ProfilePannel
   }
 }
 </script>

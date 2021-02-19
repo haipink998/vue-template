@@ -2,29 +2,46 @@
   <div class="col-sm-8">
     <div class="element-wrapper">
       <h6 class="element-header">
-        Bar Charts
+        Biểu đồ hút sữa
+        <!-- {{ data && data.mother_data[0].total }}
+        {{ data && data.mother_data[0].day }} -->
       </h6>
+
       <div class="element-box">
-        <h5 class="form-header">
-          Powered by Chart.js
-        </h5>
-        <div class="form-desc">
-          Simple yet flexible JavaScript charting for designers & developers. <a href="http://www.chartjs.org/" target="_blank">Learn More about Chart.js</a>
-        </div>
-        <div class="el-chart-w">
-          <canvas height="145" id="barChart1" width="300"></canvas>
-        </div>
+        <Barchart
+          :label="'ml'"
+          :dataLabels="parseDataLabel"
+          :data="parseData"
+          :bgcolor="'#ffa6a6'"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import Barchart from "~/components/Chart/Barchart";
+import { convertDateTime } from '~/helpers/time';
 
-}
+export default {
+  components: {
+    Barchart
+  },
+  props: {
+    dataChart: {
+      type: Array ,
+      default: () => []
+    }
+  },
+  computed: {
+    parseDataLabel: function() {
+      return this.dataChart.map(el => el.day ? convertDateTime(el.day) : "");
+    },
+    parseData: function() {
+      return this.dataChart.map(el => el.total);
+    }
+  }
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

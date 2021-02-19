@@ -416,9 +416,9 @@ $(function () {
       var lineChart = $("#lineChart"); // line chart data
 
       var lineData = {
-        labels: ["1", "5", "10", "15", "20", "25", "30", "35"],
+        labels: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12"],
         datasets: [{
-          label: "Visitors Graph",
+          label: "Kg",
           fill: false,
           lineTension: 0.3,
           backgroundColor: "#fff",
@@ -436,7 +436,7 @@ $(function () {
           pointHoverBorderWidth: 3,
           pointRadius: 5,
           pointHitRadius: 10,
-          data: [27, 20, 44, 24, 29, 22, 43, 52],
+          data: [27, 20, 44, 24, 29, 22, 43, 23],
           spanGaps: false
         }]
       }; // line chart init
@@ -523,7 +523,56 @@ $(function () {
       });
     } // init pie chart if element exists
 
+    if ($("#barChartSon").length) {
+      var barChartSon = $("#barChartSon");
+      var barData1 = {
+        labels: ["January", "February", "March", "April", "May", "June",],
+        datasets: [{
+          label: "My First dataset",
+          backgroundColor: ["#5797FC", "#629FFF", "#6BA4FE", "#74AAFF", "#7AAEFF", '#85B4FF'],
+          borderColor: ['rgba(255,99,132,0)', 'rgba(54, 162, 235, 0)', 'rgba(255, 206, 86, 0)', 'rgba(75, 192, 192, 0)', 'rgba(153, 102, 255, 0)', 'rgba(255, 159, 64, 0)'],
+          borderWidth: 1,
+          data: [24, 42, 18, 34, 96, 28]
+        }]
+      }; // -----------------
+      // init bar chart
+      // -----------------
 
+      new Chart(barChartSon, {
+        type: 'bar',
+        data: barData1,
+        options: {
+          scales: {
+            xAxes: [{
+              display: false,
+              ticks: {
+                fontSize: '11',
+                fontColor: '#969da5'
+              },
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)',
+                zeroLineColor: 'rgba(0,0,0,0.05)'
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              },
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)',
+                zeroLineColor: '#6896f9'
+              }
+            }]
+          },
+          legend: {
+            display: false
+          },
+          animation: {
+            animateScale: true
+          }
+        }
+      });
+    } // init pie chart if element exists
     if ($("#pieChart1").length) {
       var pieChart1 = $("#pieChart1"); // pie chart data
 

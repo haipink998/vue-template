@@ -133,7 +133,7 @@ export default {
   components: true,
 
   router: {
-    middleware: ['loadExternalJS', 'check-auth', 'auth', 'get-user']
+    middleware: ['loadExternalJS', 'check-auth', 'auth', 'get-user',]
   },
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)

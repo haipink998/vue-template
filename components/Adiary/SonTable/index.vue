@@ -13,8 +13,6 @@
           <Button />
           <!-- Table -->
           <Table />
-          <!-- Paganation -->
-          <Paganation />
         </div>
       </div>
       
@@ -25,10 +23,9 @@
 <script>
 import Button from "./Button";
 import Table from "./Table";
-import Paganation from "./Pagination";
 export default {
   components: {
-    Button,Table,Paganation
+    Button,Table
   }
 };
 </script>

@@ -45,6 +45,10 @@ class HttpMethod {
     return this.axios.put(...arg);
   }
 
+  patch(...arg) {
+    return this.axios.patch(...arg);
+  }
+
   delete(...arg) {
     return this.axios.delete(...arg);
   }
